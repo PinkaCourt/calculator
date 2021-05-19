@@ -18,30 +18,61 @@ const Body: React.FC<Props> = () => {
 
   const [value, setValue] = React.useState("");
   const [operation, setOperation] = React.useState("");
+  const [total, setTotal] = React.useState("");
 
   const handleChange = (str: string, type: Buttons) => {
-    setValue((prevState) => {
-      switch (
-        type
-        /* case Buttons.SUM: {
-                
-                return  `${parseInt(prevState)}`
-            }
-            case Buttons.MINUS: {
-                return `${parseInt(prevState) - parseInt(str)}`}
-            case Buttons.MULT: {}
-            case  Buttons.DIVISION: {}
-            case : {}
-            case : {}*/
-      ) {
+    switch (type) {
+      case Buttons.CLEAR: {
+        setTotal("");
+        setValue("");
+        setOperation("");
+        break;
       }
-      return prevState + str;
-    });
+      case Buttons.EQUALLY: {
+        setValue(total);
+        setOperation("");
+        break;
+      }
+
+      default:
+        setValue((prevState) => prevState + str);
+        break;
+    }
+
+    if (total === "") {
+      setTotal(str);
+    }
+
+    if (type !== Buttons.VALUE) {
+      setOperation(str);
+    }
+
+    if (operation !== "") {
+      switch (operation) {
+        case "+": {
+          setTotal((prevState) => `${parseInt(prevState) + parseInt(str)}`);
+          break;
+        }
+        case "-": {
+          setTotal((prevState) => `${parseInt(prevState) - parseInt(str)}`);
+          break;
+        }
+        case "*": {
+          setTotal((prevState) => `${parseInt(prevState) * parseInt(str)}`);
+          break;
+        }
+        case "/": {
+          setTotal((prevState) => `${parseInt(prevState) / parseInt(str)}`);
+          break;
+        }
+      }
+      setOperation("");
+    }
   };
 
   return (
     <div className={slyles.root}>
-      <Display value={value} />
+      <Display value={value} total={total} />
       <Keyboard handleChange={handleChange} />
     </div>
   );

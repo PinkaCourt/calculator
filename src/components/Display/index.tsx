@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,11 +12,17 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   value: string;
+  total: string;
 };
-const Display: React.FC<Props> = ({ value }) => {
+const Display: React.FC<Props> = ({ value, total }) => {
   const styles = useStyles();
 
-  return <div className={styles.root}> {value}</div>;
+  return (
+    <div className={styles.root}>
+      <Typography variant="h4"> {value} </Typography>
+      <Typography variant="body1"> {total}</Typography>
+    </div>
+  );
 };
 
 export default Display;
