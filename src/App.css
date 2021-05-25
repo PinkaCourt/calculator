@@ -1,10 +1,28 @@
 .App {
   text-align: center;
+  background-color: darkgray;
+  height: 700px;
+  width: 700px;
+}
+
+.slider {
+  width: 500px;
+  height: 367px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  scroll-snap-type: x mandatory;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+img {
+  height: auto;
+  flex: 0 0 500px;
+  scroll-snap-align: start;
 }
 
 @media (prefers-reduced-motion: no-preference) {
