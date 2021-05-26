@@ -15,3 +15,11 @@
 ##### body:
 
 `{ email: string, password: string }`
+
+### Get user data items
+
+`GET /user/data`
+
+##### query params:
+
+`userId: string`

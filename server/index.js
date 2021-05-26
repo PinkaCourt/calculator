@@ -1,41 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const db = require("./database");
-
-const createUserRecord = (email, password, cb) => {
-  bcrypt.hash(password, 2, (err, hash) => {
-    if (err) {
-      console.log("Error during hashing", err);
-      return false;
-    }
-
-    const sql =
-      "INSERT INTO user (name, email, password, avatar) values(?,?,?,?)";
-
-    return db.run(sql, [null, email, hash, null], (err, rows) => {
-      if (err) {
-        console.log("An error occured.\n", err);
-        return false;
-      }
-
-      cb(true);
-    });
-  });
-};
-
-const getUserByEmail = (email, cb) => {
-  const sql = `SELECT * from user where email='${email}'`;
-
-  return db.get(sql, (err, rows) => {
-    if (err) {
-      console.log("Error executing SQL.\n", sql, err);
-      return;
-    }
-
-    cb(rows);
-    return rows;
-  });
-};
+const { getUserByEmail, getUserData, createUserRecord } = require("./database");
 
 const app = express();
 app.use(express.json());
@@ -47,8 +12,16 @@ app.listen(HTTP_PORT, () => {
   console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT));
 });
 
-app.get("/", (req, res, next) => {
-  res.json({ message: "Ok" });
+app.get("/user/data", (req, res, next) => {
+  const { userId } = req.query;
+
+  if (!userId) {
+    return res.status(400).json({ error: "userId not specified" });
+  }
+
+  getUserData(userId, (items) => {
+    return res.status(200).json({ message: "records found", items });
+  });
 });
 
 app.post("/user/login", (req, res) => {
