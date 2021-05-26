@@ -32,7 +32,8 @@ const db = new sqlite.Database(dbPath, (err) => {
     userId INTEGER,
     ds text,
     ans text,
-    wtl text
+    wtl text,
+    date INTEGER
     )`,
     (err) => {
       if (err) {
@@ -83,11 +84,17 @@ const genUserData = (userId, sampleSize) => {
   }
 
   const mockData = Array.from(Array(sampleSize)).map(() => {
-    return [userId, Math.random() * 20, Math.random() * 2, Math.random() * 100];
+    return [
+      userId,
+      Math.random() * 20,
+      Math.random() * 2,
+      Math.random() * 100,
+      new Date(Date.now() - 7776000000 * Math.random()), // Mock data from now to - 3 months ago
+    ];
   });
 
   const sql = db.prepare(
-    "INSERT INTO customer (userId, ds, ans, wtl) VALUES (?,?,?,?)"
+    "INSERT INTO customer (userId, ds, ans, wtl, date) VALUES (?,?,?,?,?)"
   );
 
   mockData.forEach((item) => sql.run(item));
