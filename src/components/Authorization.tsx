@@ -23,9 +23,12 @@ const Authorization = () => {
       <button className={"form-submit"} type="submit">
         Sign in
       </button>
-      <a href="/registration" className={"link-reg"}>
-        new to S&D? create account
-      </a>
+      <span className="link">
+        new to S&D?
+        <a href="/registration" className={"link-reg"}>
+          create account
+        </a>
+      </span>
     </form>
   );
 };
