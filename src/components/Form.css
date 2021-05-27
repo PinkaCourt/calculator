@@ -17,6 +17,10 @@ input {
   padding: 0;
 }
 
+input:invalid {
+  border-color: var(--ErrorColor);
+}
+
 .submit {
   height: 70px;
   width: 500px;
