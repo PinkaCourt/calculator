@@ -6,18 +6,19 @@ const Authorization = () => {
     <form className={"App-form"}>
       <input
         className={"App-input"}
-        // type="email"
-        type="text"
+        type="email"
         name="email"
         placeholder="Email"
+        autoComplete={"off"}
+        required
       ></input>
 
       <input
         className={"App-input"}
-        //type="password"
-        type="text"
+        type="password"
         name="password"
         placeholder="Password"
+        autoComplete={"off"}
       ></input>
       <button className={"form-submit"} type="submit">
         Sign in

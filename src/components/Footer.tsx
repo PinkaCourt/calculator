@@ -4,9 +4,7 @@ import "App.css";
 const Footer = () => {
   return (
     <footer className={"App-footer"}>
-      <span>
-        <p>created with depression © 2021-2021 </p>
-      </span>
+      created with depression © 2021-2021
     </footer>
   );
 };
