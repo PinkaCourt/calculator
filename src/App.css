@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+@import "Colors.css";
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url(~fonts/RobotoMono.ttf) format("ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Reem Kufi";
+  src: url(~fonts/ReemKufi-Regular.ttf) format("ttf");
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: var(--WhiteColor);
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  position: absolute;
+  top: 30px;
+  left: 35px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 10vh;
+  margin-top: 0;
+  color: var(--BlackColor);
+  background-color: var(--HeaderColor);
+  vertical-align: middle;
+  padding-left: 10px;
+  font: normal 36px "ReemKufi", sans-serif;
+}
+
+.App-footer {
+  position: absolute;
+  width: 100%;
+  color: var(--FooterColor);
+  bottom: 0px;
+  text-align: center;
+  font: normal 14px "Roboto Mono", sans-serif;
+}
+
+.App-form {
+  height: 500px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 120px auto;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+  height: 70px;
+  width: 500px;
+  border: 5px solid var(--BlackColor);
+  margin-bottom: 15px;
+  font: normal 36px "Roboto Mono", sans-serif;
+  color: var(--borderColor);
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-submit {
+  height: 70px;
+  width: 500px;
+  outline: 5px solid var(--BlackColor);
+  margin-bottom: 15px;
+  font: normal 36px "Roboto Mono", sans-serif;
+  color: var(--WhiteColor);
+  background-color: var(--BlackColor);
+}
+
+.link-reg {
+  position: relative;
+  right: -220px;
+  height: 54px;
+  width: 337px;
+  color: var(--borderColor);
+  margin-right: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  text-shadow: 0px 4px 4px #666;
 }
