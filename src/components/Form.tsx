@@ -13,11 +13,13 @@ const Form: React.FC<Props> = (props: Props) => {
         button: "Sign in",
         span: "new to S&D? ",
         link: "create account",
+        path: "/sungup",
       }
     : {
         button: "Sign up",
         span: "have an S&D account? ",
         link: "log in",
+        path: "/",
       };
 
   return (
@@ -51,7 +53,7 @@ const Form: React.FC<Props> = (props: Props) => {
       </button>
       <span className="link">
         {signature.span}
-        <a href={autorization ? "/sungup" : "/"} className={"link-reg"}>
+        <a href={signature.path} className={"link-reg"}>
           {signature.link}
         </a>
       </span>
