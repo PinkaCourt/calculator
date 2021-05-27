@@ -11,12 +11,12 @@ const Form: React.FC<Props> = (props: Props) => {
   const signature = autorization
     ? {
         button: "Sign in",
-        span: "new to S&D?",
+        span: "new to S&D? ",
         link: "create account",
       }
     : {
         button: "Sign up",
-        span: "have an S&D account?",
+        span: "have an S&D account? ",
         link: "log in",
       };
 
