@@ -1,6 +1,8 @@
 import React from "react";
 import "./Form.css";
 
+import { routes } from "App";
+
 type Props = {
   autorization: boolean;
 };
@@ -13,13 +15,13 @@ const Form: React.FC<Props> = (props) => {
         button: "Sign in",
         span: "new to S&D? ",
         link: "create account",
-        path: "/signUp",
+        path: routes[1].path,
       }
     : {
         button: "Sign up",
         span: "have an S&D account? ",
         link: "log in",
-        path: "/",
+        path: routes[0].path,
       };
 
   return (

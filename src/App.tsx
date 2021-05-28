@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Auth from "pages/Auth/Auth";
 import SignUp from "pages/SignUp/SignUp";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     exact: true,
