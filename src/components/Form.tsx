@@ -15,13 +15,13 @@ const Form: React.FC<Props> = (props) => {
         button: "Sign in",
         span: "new to S&D? ",
         link: "create account",
-        path: routes[1].path,
+        path: routes.signUp.path,
       }
     : {
         button: "Sign up",
         span: "have an S&D account? ",
         link: "log in",
-        path: routes[0].path,
+        path: routes.auth.path,
       };
 
   return (
