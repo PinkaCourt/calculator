@@ -22,9 +22,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        {Object.values(routes).map((route, index) => (
+        {Object.values(routes).map((route) => (
           <Route
-            key={index}
+            key={route.path}
             path={route.path}
             exact={route.exact}
             render={route.component}
