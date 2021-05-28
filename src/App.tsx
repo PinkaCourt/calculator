@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Auth from "pages/Auth/Auth";
-import Sungup from "pages/Sungup/Sungup";
+import SignUp from "pages/SignUp/SignUp";
 
 const routes = [
   {
@@ -12,8 +12,8 @@ const routes = [
     component: Auth,
   },
   {
-    path: "/sungup",
-    component: Sungup,
+    path: "/signUp",
+    component: SignUp,
   },
 ];
 

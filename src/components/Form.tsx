@@ -5,7 +5,7 @@ type Props = {
   autorization: boolean;
 };
 
-const Form: React.FC<Props> = (props: Props) => {
+const Form: React.FC<Props> = (props) => {
   const { autorization } = props;
 
   const signature = autorization
@@ -13,7 +13,7 @@ const Form: React.FC<Props> = (props: Props) => {
         button: "Sign in",
         span: "new to S&D? ",
         link: "create account",
-        path: "/sungup",
+        path: "/signUp",
       }
     : {
         button: "Sign up",

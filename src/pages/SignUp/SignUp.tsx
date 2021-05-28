@@ -2,10 +2,9 @@ import React from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Form from "components/Form";
-import "./Sungup.css";
+import "./SignUp.css";
 
-const Sungup = () => {
-  console.log("Sungup");
+const SignUp = () => {
   return (
     <div className="Auth">
       <Header />
@@ -15,4 +14,4 @@ const Sungup = () => {
   );
 };
 
-export default Sungup;
+export default SignUp;
