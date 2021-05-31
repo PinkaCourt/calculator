@@ -2,13 +2,11 @@ import React from "react";
 import "./Form.css";
 
 import { routes } from "App";
+import { signIn, signUp, getData } from "utils";
 
 type Props = {
   autorization: boolean;
 };
-
-const regUrl = "/user/create";
-const authUrl = "/user/login";
 
 const Form: React.FC<Props> = (props) => {
   const { autorization } = props;
@@ -16,6 +14,8 @@ const Form: React.FC<Props> = (props) => {
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [formValid, setFormValid] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const signature = autorization
     ? {
@@ -37,56 +37,56 @@ const Form: React.FC<Props> = (props) => {
     setLogin(event.target.value);
   };
 
-  const handlePasswordChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handlePasswordChange = (event: { target: { value: string } }) => {
     setPassword(event.target.value);
   };
 
   const handleConfirmPasswordChange = (event: {
-    target: { value: React.SetStateAction<string> };
+    target: { value: string };
   }) => {
     setConfirmPassword(event.target.value);
   };
 
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
-    const url = autorization ? authUrl : regUrl;
+    event.preventDefault();
 
-    if (!autorization && password !== confirmPassword) {
-      console.log("Passwords do not match");
-      return;
-    }
+    const response = autorization
+      ? signIn(login, password)
+      : signUp(login, password);
 
-    const formData = new FormData();
-    formData.append("email", login);
-    formData.append("password", password);
-
-    const params: RequestInit = {
-      method: "POST",
-      headers: {
-        ContentType: "application/json",
-      },
-      body: formData,
-    };
-
-    fetch(url, params)
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        console.log("json", json);
-      })
-      .catch(console.log);
+    response.then((data) => {
+      if (data.error) {
+        return setError(data.error);
+      }
+      console.log(data);
+    });
   };
 
+  React.useEffect(() => {
+    const pwdMatch = confirmPassword === password;
+    const fieldsFilled = Boolean(login.length && password.length);
+
+    const isValid =
+      (autorization && fieldsFilled) ||
+      (!autorization && fieldsFilled && pwdMatch);
+
+    if (!isValid && !fieldsFilled) {
+      setError("Fill in all the fields");
+    }
+
+    if (!autorization && !isValid && !pwdMatch) {
+      setError("Passwords do not match");
+    }
+
+    setFormValid(isValid);
+
+    if (formValid) {
+      setError("");
+    }
+  }, [autorization, login, password, confirmPassword, formValid]);
+
   return (
-    <form
-      className={"form"}
-      onSubmit={(event) => {
-        event.preventDefault();
-        handleClick(event);
-      }}
-    >
+    <form className={"form"} onSubmit={handleClick}>
       <input
         className={"input"}
         type="email"
@@ -95,7 +95,7 @@ const Form: React.FC<Props> = (props) => {
         autoComplete={"off"}
         required
         onChange={handleLoginChange}
-      ></input>
+      />
       <input
         className={"input"}
         type="password"
@@ -103,7 +103,7 @@ const Form: React.FC<Props> = (props) => {
         placeholder="Password"
         autoComplete={"off"}
         onChange={handlePasswordChange}
-      ></input>
+      />
       {!autorization && (
         <input
           className={"input"}
@@ -112,9 +112,9 @@ const Form: React.FC<Props> = (props) => {
           placeholder="Password"
           autoComplete={"off"}
           onChange={handleConfirmPasswordChange}
-        ></input>
+        />
       )}
-      <button className={"submit"} type="submit">
+      <button className={"submit"} type="submit" disabled={!formValid}>
         {signature.button}
       </button>
       <span className="link">
@@ -123,6 +123,7 @@ const Form: React.FC<Props> = (props) => {
           {signature.link}
         </a>
       </span>
+      {error.length > 0 && <span className="error">{error}</span>}
     </form>
   );
 };
