@@ -114,7 +114,11 @@ const Form: React.FC<Props> = (props) => {
           onChange={handleConfirmPasswordChange}
         />
       )}
-      <button className={"submit"} type="submit" disabled={!formValid}>
+      <button
+        className={formValid ? "submit" : "disable_button"}
+        type="submit"
+        disabled={!formValid}
+      >
         {signature.button}
       </button>
       <span className="link">
