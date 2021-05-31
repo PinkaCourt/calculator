@@ -2,7 +2,7 @@ import React from "react";
 import "./Form.css";
 
 import { routes } from "App";
-import { signIn, signUp, getData } from "utils";
+import { signIn, signUp } from "utils";
 
 type Props = {
   autorization: boolean;
