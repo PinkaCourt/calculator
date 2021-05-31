@@ -14,7 +14,6 @@ export const getData = (userId: string) => {
 
   return fetch(url)
     .then((response) => response.json())
-    .then((data) => console.log(data))
     .catch((error) => error);
 };
 
@@ -29,7 +28,6 @@ export const signIn = (email: string, password: string) => {
 
   return fetch(authUrl, params)
     .then((response) => response.json())
-    .then((json) => json)
     .catch((error) => error);
 };
 
@@ -44,6 +42,5 @@ export const signUp = (email: string, password: string) => {
 
   return fetch(regUrl, params)
     .then((response) => response.json())
-    .then((json) => json)
     .catch((error) => error);
 };
