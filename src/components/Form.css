@@ -41,3 +41,9 @@ input:invalid {
   text-decoration: none;
   text-shadow: 0px 4px 4px var(--BorderColor);
 }
+
+.error {
+  color: var(--ErrorColor);
+  font: normal 16px "Roboto Mono", sans-serif;
+  margin: 10px 0 0 0;
+}
