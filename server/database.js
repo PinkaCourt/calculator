@@ -78,7 +78,7 @@ const getUserByEmail = (email, cb) => {
   });
 };
 
-const genUserData = (userId, sampleSize) => {
+const genUserData = (userId, sampleSize = 1000) => {
   if (!userId) {
     return;
   }
@@ -114,6 +114,10 @@ const getUserData = (userId, cb) => {
   });
 };
 
-// genUserData("foo@bar.com", 1000);
-
-module.exports = { db, getUserByEmail, createUserRecord, getUserData };
+module.exports = {
+  db,
+  getUserByEmail,
+  createUserRecord,
+  getUserData,
+  genUserData,
+};
