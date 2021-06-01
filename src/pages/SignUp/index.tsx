@@ -1,17 +1,17 @@
 import React from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
-import Authorization from "components/Authorization";
-import "./Auth.css";
+import Form from "components/Form";
+import "./SignUp.css";
 
-const Auth = () => {
+const SignUp = () => {
   return (
     <div className="Auth">
       <Header />
-      <Authorization />
+      <Form autorization={false} />
       <Footer />
     </div>
   );
 };
 
-export default Auth;
+export default SignUp;
