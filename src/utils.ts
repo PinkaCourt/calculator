@@ -2,13 +2,6 @@ const regUrl = "/user/create";
 const authUrl = "/user/login";
 const dataUrl = "/user/data";
 
-const getFormData = (email: string, password: string) => {
-  const formData = new FormData();
-  formData.append("email", email);
-  formData.append("password", password);
-  return formData;
-};
-
 export const getData = (userId: string) => {
   const url = dataUrl + `?query=${userId}`;
 
@@ -21,9 +14,9 @@ export const signIn = (email: string, password: string) => {
   const params: RequestInit = {
     method: "POST",
     headers: {
-      ContentType: "application/json",
+      "Content-Type": "application/json",
     },
-    body: getFormData(email, password),
+    body: JSON.stringify({ email, password }),
   };
 
   return fetch(authUrl, params)
@@ -35,9 +28,9 @@ export const signUp = (email: string, password: string) => {
   const params: RequestInit = {
     method: "POST",
     headers: {
-      ContentType: "application/json",
+      "Content-Type": "application/json",
     },
-    body: getFormData(email, password),
+    body: JSON.stringify({ email, password }),
   };
 
   return fetch(regUrl, params)
