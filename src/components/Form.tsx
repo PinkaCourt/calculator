@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./Form.css";
 
 import { routes } from "App";
@@ -16,6 +17,7 @@ const Form: React.FC<Props> = (props) => {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [formValid, setFormValid] = React.useState(false);
   const [error, setError] = React.useState("");
+  const history = useHistory();
 
   const signature = autorization
     ? {
@@ -58,7 +60,7 @@ const Form: React.FC<Props> = (props) => {
       if (data.error) {
         return setError(data.error);
       }
-      console.log(data);
+      history.push("/dashboard");
     });
   };
 

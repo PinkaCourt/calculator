@@ -1,0 +1,9 @@
+.dashboard {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  height: 86vh;
+  width: 100%;
+}
