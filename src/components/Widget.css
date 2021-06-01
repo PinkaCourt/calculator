@@ -1,0 +1,8 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  background-color: cornflowerblue;
+  margin: 15px;
+}
