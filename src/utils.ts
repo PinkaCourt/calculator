@@ -2,10 +2,17 @@ const regUrl = "/user/create";
 const authUrl = "/user/login";
 const dataUrl = "/user/data";
 
-export const getData = (userId: string) => {
-  const url = dataUrl + `?query=${userId}`;
+export const getData = (userId: string, token: string) => {
+  const url = dataUrl + `?userId=${userId}`;
 
-  return fetch(url)
+  const params: RequestInit = {
+    method: "GET",
+    headers: {
+      "x-access-token": token,
+    },
+  };
+
+  return fetch(url, params)
     .then((response) => response.json())
     .catch((error) => error);
 };

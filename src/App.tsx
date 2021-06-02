@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import Auth from "pages/Auth";
 import SignUp from "pages/SignUp";
 import Dashboard from "pages/Dashboard";
-import { store } from "store";
+import { store } from "store/store";
 
 export const routes = {
   auth: {
@@ -36,7 +36,7 @@ function App() {
               key={route.path}
               path={route.path}
               exact={route.exact}
-              render={route.component}
+              component={route.component}
             />
           ))}
         </Switch>

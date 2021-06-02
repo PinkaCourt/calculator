@@ -1,11 +1,9 @@
 import React from "react";
-import "App.css";
+import "components/Components.css";
 
 const Footer = () => {
   return (
-    <footer className={"App-footer"}>
-      created with depression © 2021-2021
-    </footer>
+    <footer className={"footer"}>created with depression © 2021-2021</footer>
   );
 };
 

@@ -1,0 +1,26 @@
+.logo {
+  position: fixed;
+  top: 30px;
+  left: 35px;
+  cursor: default;
+}
+
+.header {
+  min-height: 100px;
+  width: 100%;
+  top: 0;
+  left: 0px;
+  color: var(--BlackColor);
+  background-color: var(--HeaderColor);
+  font: normal 36px "Reem Kufi", sans-serif;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  color: var(--FooterColor);
+  bottom: 10px;
+  text-align: center;
+  font: normal 14px "Roboto Mono", sans-serif;
+  cursor: default;
+}

@@ -1,8 +1,8 @@
 import React from "react";
-import "App.css";
+import "components/Components.css";
 
 const Logo = () => {
-  return <span className={"App-logo"}>Suck & Duck inc.</span>;
+  return <span className={"logo"}>Suck & Duck inc.</span>;
 };
 
 export default Logo;
