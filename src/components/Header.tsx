@@ -1,10 +1,10 @@
 import React from "react";
 import Logo from "components/Logo";
-import "App.css";
+import "components/Components.css";
 
 const Header = () => {
   return (
-    <header className={"App-header"}>
+    <header className={"header"}>
       <Logo />
     </header>
   );

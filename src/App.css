@@ -19,28 +19,6 @@ body {
   overflow: hidden;
 }
 
-.App-logo {
-  position: absolute;
-  top: 30px;
-  left: 35px;
-}
-
-.App-header {
-  height: 10vh;
-  width: 100%;
-  margin-top: 0;
-  color: var(--BlackColor);
-  background-color: var(--HeaderColor);
-  vertical-align: middle;
-  padding-left: 10px;
-  font: normal 36px "Reem Kufi", sans-serif;
-}
-
-.App-footer {
-  position: fixed;
-  width: 100%;
-  color: var(--FooterColor);
-  bottom: 10px;
-  text-align: center;
-  font: normal 14px "Roboto Mono", sans-serif;
+a {
+  text-decoration: none;
 }

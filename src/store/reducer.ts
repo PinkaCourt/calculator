@@ -1,12 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getUser } from "actions";
+import { getUser } from "store/actions";
+import { User } from "store/types";
 
-interface IniteState {
-  user: string;
+export interface IniteState {
+  user: User | null;
 }
 
 const initeState: IniteState = {
-  user: "",
+  user: null,
 };
 
 export const dashboardReducer = createReducer(initeState, (builder) => {

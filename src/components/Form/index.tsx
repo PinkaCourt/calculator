@@ -1,6 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import "./Form.css";
+import { getUser } from "store/actions";
 
 import { routes } from "App";
 import { signIn, signUp } from "utils";
@@ -18,6 +21,7 @@ const Form: React.FC<Props> = (props) => {
   const [formValid, setFormValid] = React.useState(false);
   const [error, setError] = React.useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const signature = autorization
     ? {
@@ -60,7 +64,11 @@ const Form: React.FC<Props> = (props) => {
       if (data.error) {
         return setError(data.error);
       }
-      history.push("/dashboard");
+
+      if (data.auth) {
+        dispatch(getUser(data));
+        history.push("/dashboard");
+      }
     });
   };
 
