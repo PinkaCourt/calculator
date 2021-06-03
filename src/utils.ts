@@ -1,6 +1,7 @@
 const regUrl = "/user/create";
 const authUrl = "/user/login";
 const dataUrl = "/user/data";
+const mockUrl = "/user/data/mock";
 
 export const getData = (userId: string, token: string) => {
   const url = dataUrl + `?userId=${userId}`;
