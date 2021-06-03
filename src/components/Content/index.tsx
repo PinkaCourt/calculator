@@ -34,6 +34,11 @@ const Content = () => {
   const averageAS = toAverage(monthlyData.map((e) => e.ans));
   const averageWL = toAverage(monthlyData.map((e) => e.wtl));
 
+  /*
+  const toWidget = ()=> {
+
+  }*/
+
   const widgetDS = {
     name: "DICK SIZE, cm",
     data: monthlyData[0].ds,
@@ -42,13 +47,13 @@ const Content = () => {
   const widgetAS = {
     name: "ANAL SIZE, cm",
     data: monthlyData[0].ans,
-    average: "-1.2",
+    average: averageAS,
   };
 
   const widgetWL = {
     name: "DICK SIZE, cm",
-    data: "12.1",
-    average: "-1.2",
+    data: monthlyData[0].wtl,
+    average: averageWL,
   };
 
   const arr = [widgetDS, widgetAS, widgetWL];
