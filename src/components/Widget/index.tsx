@@ -4,7 +4,7 @@ import "./Widget.css";
 export type Props = {
   name: string;
   data: string;
-  average: string;
+  average: number;
 };
 
 const Widget: React.FC<Props> = (props) => {
