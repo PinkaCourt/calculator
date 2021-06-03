@@ -1,37 +1,47 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
+import { selectData } from "store/selectors";
 import Widget from "components/Widget";
 import Chart from "components/Chart";
 import "./Content.css";
-import { Data } from "store/types";
 
-type Props = {
-  data: Data[];
+const toAverage = (data: string[]) => {
+  const quantity = data.length;
+
+  const sum = data.reduce((acc, value) => acc + parseFloat(value), 0);
+
+  const average = (sum / quantity).toFixed(2);
+
+  return average;
 };
 
-const Content: React.FC<Props> = (props) => {
-  const { data } = props;
+const Content = () => {
+  const data = useSelector(selectData);
 
   if (data.length === 0) {
     return null;
   }
 
-  const lastDS = data.map((e) => e.ds).shift();
+  const startPeriod = new Date().setMonth(new Date().getMonth() - 1);
+  const endPeriod = Date.now();
 
-  const lastAS = data.map((e) => e.ans).shift();
+  const monthlyData = data.filter(
+    (mnt) => mnt.date > startPeriod && mnt.date < endPeriod
+  );
 
-  //const lastMonth =
-
-  console.log("lastDS", lastDS);
-  console.log("lastAS", lastAS);
+  const averageDS = toAverage(monthlyData.map((e) => e.ds));
+  const averageAS = toAverage(monthlyData.map((e) => e.ans));
+  const averageWL = toAverage(monthlyData.map((e) => e.wtl));
 
   const widgetDS = {
     name: "DICK SIZE, cm",
-    data: lastDS,
-    average: "-1.2",
+    data: monthlyData[0].ds,
+    average: averageDS,
   };
   const widgetAS = {
     name: "ANAL SIZE, cm",
-    data: lastAS,
+    data: monthlyData[0].ans,
     average: "-1.2",
   };
 
@@ -45,10 +55,11 @@ const Content: React.FC<Props> = (props) => {
 
   return (
     <div className={"content_container"}>
-      {arr.map((data) => (
-        <Widget name={data.name} data={"kf"} average={data.average} />
-      ))}
-
+      <Widget
+        name={widgetDS.name}
+        data={widgetDS.data}
+        average={widgetDS.average}
+      />
       <Chart />
     </div>
   );

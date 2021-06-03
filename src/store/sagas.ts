@@ -1,4 +1,4 @@
-import { call, put, take } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 
 import { signIn, signUp, getData } from "utils";
 import * as A from "store/actions";
@@ -9,19 +9,26 @@ function* authorizationUser({
 }: ReturnType<typeof A.authorizationUser>) {
   const user: T.User = yield call(signIn, payload.login, payload.password);
 
-  console.log("user-response", user);
-
   yield put(A.setUser(user));
 }
 
-function* registerUser(login: string, password: string) {
-  const response: T.User = yield call(signUp, login, password);
+function* registerUser({ payload }: ReturnType<typeof A.registerUser>) {
+  const response: T.User = yield call(signUp, payload.login, payload.password);
+}
 
-  console.log("response", response);
+function* getUserData({ payload }: ReturnType<typeof A.setUser>) {
+  const data: T.serverDataUser = yield call(
+    getData,
+    payload.email,
+    payload.accessToken
+  );
+
+  yield put(A.setUserData(data.items));
 }
 
 export default function* fetchUser() {
-  yield take(A.authorizationUser, authorizationUser);
-  yield take(A.registerUser, registerUser);
-  //yield take(A.getUserData, getUserData);
+  yield takeEvery(A.authorizationUser, authorizationUser);
+
+  yield takeEvery(A.registerUser, registerUser);
+  yield takeEvery(A.setUser, getUserData);
 }

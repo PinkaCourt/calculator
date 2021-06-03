@@ -1,4 +1,14 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
 import { dashboardReducer } from "store/reducer";
 
-export const store = createStore(dashboardReducer);
+import fetchUser from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = createStore(
+  dashboardReducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(fetchUser);

@@ -12,5 +12,10 @@ export type Data = {
   ans: string;
   wtl: string;
   userId: string;
-  date: Date;
+  date: number;
+};
+
+export type serverDataUser = {
+  items: Data[];
+  message: string;
 };

@@ -1,12 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import "./Form.css";
 import * as A from "store/actions";
-
+import { selectUser } from "store/selectors";
 import { routes } from "App";
-import { signIn, signUp } from "utils";
+import "./Form.css";
 
 type Props = {
   autorization: boolean;
@@ -22,6 +21,7 @@ const Form: React.FC<Props> = (props) => {
   const [error, setError] = React.useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const signature = autorization
     ? {
@@ -55,30 +55,10 @@ const Form: React.FC<Props> = (props) => {
 
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    /*
-    const response = autorization
-      ? signIn(login, password)
-      : signUp(login, password);
-*/
 
     const response = autorization
       ? dispatch(A.authorizationUser({ login, password }))
       : dispatch(A.registerUser({ login, password }));
-
-    /*
-    response.then((data) => {
-      if (data.error) {
-        return setError(data.error);
-      }
-
-      if (data.auth) {
-        dispatch(A.setUser(data));
-        document.cookie = `accessToken=${data.accessToken}`;
-        history.push("/dashboard");
-      }
-    });
-
-*/
   };
 
   React.useEffect(() => {
@@ -103,6 +83,13 @@ const Form: React.FC<Props> = (props) => {
       setError("");
     }
   }, [autorization, login, password, confirmPassword, formValid]);
+
+  React.useEffect(() => {
+    if (user !== null) {
+      document.cookie = `accessToken=${user.accessToken};max-age=864e2`;
+      history.push("/dashboard");
+    }
+  }, [user, history]);
 
   return (
     <form className={"form"} onSubmit={handleClick}>
