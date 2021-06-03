@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import "./Form.css";
-import { getUser } from "store/actions";
+import * as A from "store/actions";
 
 import { routes } from "App";
 import { signIn, signUp } from "utils";
@@ -55,21 +55,30 @@ const Form: React.FC<Props> = (props) => {
 
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    /*
     const response = autorization
       ? signIn(login, password)
       : signUp(login, password);
+*/
 
+    const response = autorization
+      ? dispatch(A.authorizationUser({ login, password }))
+      : dispatch(A.registerUser({ login, password }));
+
+    /*
     response.then((data) => {
       if (data.error) {
         return setError(data.error);
       }
 
       if (data.auth) {
-        dispatch(getUser(data));
+        dispatch(A.setUser(data));
+        document.cookie = `accessToken=${data.accessToken}`;
         history.push("/dashboard");
       }
     });
+
+*/
   };
 
   React.useEffect(() => {

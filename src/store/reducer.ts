@@ -1,9 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getUser } from "store/actions";
-import { User } from "store/types";
+import * as A from "store/actions";
+import * as T from "store/types";
 
 export interface IniteState {
-  user: User | null;
+  user: T.User | null;
 }
 
 const initeState: IniteState = {
@@ -11,7 +11,7 @@ const initeState: IniteState = {
 };
 
 export const dashboardReducer = createReducer(initeState, (builder) => {
-  builder.addCase(getUser, (state, { payload }) => {
+  builder.addCase(A.setUser, (state, { payload }) => {
     state.user = payload;
   });
 });

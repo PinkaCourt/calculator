@@ -7,11 +7,12 @@ import Footer from "components/Footer";
 import Sidebar from "components/Sidebar";
 import Content from "components/Content";
 import { getData } from "utils";
+import { Data } from "store/types";
 
 import "./Dashboard.css";
 
 const Dashboard = () => {
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState<Data[]>([]);
 
   const user = useSelector(selectUser);
 
@@ -19,19 +20,20 @@ const Dashboard = () => {
     if (!user) {
       return;
     }
-
-    const data = getData(user.email, user.accessToken).then((data) =>
-      setData(data.items)
-    );
+    const cookie = document.cookie;
+    console.log("cookie", document.cookie);
+    getData(user.email, user.accessToken).then((data) => setData(data.items));
   }, [user]);
-  //console.log("data", data);
+
+  console.log("data", data);
+
   return (
     <div className="dashboard">
       <Header />
       <div className="body_container">
         <Sidebar />
         <div className="dashboard_data_container">
-          <Content />
+          <Content data={data} />
           <Footer />
         </div>
       </div>
