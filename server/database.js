@@ -53,7 +53,7 @@ const createUserRecord = (email, password, cb) => {
     const sql =
       "INSERT INTO user (name, email, password, avatar) values(?,?,?,?)";
 
-    return db.run(sql, [null, email, hash, null], (err, rows) => {
+    return db.run(sql, [null, email, hash, null], (err) => {
       if (err) {
         console.log("An error occured.\n", err);
         return false;

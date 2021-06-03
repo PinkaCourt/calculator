@@ -12,4 +12,5 @@ module.exports = (app) => {
     authCtrl.verifyToken,
     userCtrl.updateUserAvatar
   );
+  app.get("/user/profile", authCtrl.verifyToken, userCtrl.getUserProfile);
 };

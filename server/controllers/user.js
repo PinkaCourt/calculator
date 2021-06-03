@@ -22,7 +22,19 @@ module.exports = {
         return res.status(500).json({ error: "Error creating user" });
       }
 
-      return res.status(200).json({ message: "user created" });
+      const token = jwt.sign({ id: user.id }, secret, {
+        expiresIn: 24 * 60 * 60 * 1000,
+      });
+
+      const { avatar, email, name } = user;
+
+      return res.status(200).send({
+        auth: true,
+        accessToken: token,
+        avatar,
+        email,
+        name,
+      });
     });
   },
   login(req, res) {
@@ -71,9 +83,10 @@ module.exports = {
     }
 
     getUserData(userId, (items) => {
-      return res
-        .status(200)
-        .json({ message: `${items.length} records found`, items });
+      return res.status(200).json({
+        message: `${items.length} records found`,
+        items: items.sort((a, b) => (a.date > b.date ? -1 : 1)),
+      });
     });
   },
   mockData(req, res) {
@@ -89,8 +102,6 @@ module.exports = {
   },
   updateUserAvatar(req, res) {
     const { avatar, userId } = req.body;
-
-    console.log(avatar, userId);
 
     getUserByEmail(userId, (user) => {
       if (!user) {
@@ -121,6 +132,19 @@ module.exports = {
 
         return res.status(200).json({ message: "Name updated" });
       });
+    });
+  },
+  getUserProfile(req, res) {
+    const { userId } = req.query;
+
+    getUserByEmail(userId, (user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { name, email, avatar } = user;
+
+      return res.status(200).send({ name, email, avatar });
     });
   },
 };
