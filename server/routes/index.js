@@ -6,4 +6,10 @@ module.exports = (app) => {
   app.post("/user/login", userCtrl.login);
   app.get("/user/data", authCtrl.verifyToken, userCtrl.getData);
   app.get("/user/data/mock", authCtrl.verifyToken, userCtrl.mockData);
+  app.post("/user/update/name", authCtrl.verifyToken, userCtrl.updateUserName);
+  app.post(
+    "/user/update/avatar",
+    authCtrl.verifyToken,
+    userCtrl.updateUserAvatar
+  );
 };

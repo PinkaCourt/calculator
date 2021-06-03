@@ -15,7 +15,7 @@ const db = new sqlite.Database(dbPath, (err) => {
         name text, 
         email text UNIQUE, 
         password text, 
-        avatar blob,
+        avatar text,
         CONSTRAINT email_unique UNIQUE (email)
         )`,
     (err) => {
@@ -114,10 +114,24 @@ const getUserData = (userId, cb) => {
   });
 };
 
+const updateUserParam = (userId, key, value, cb) => {
+  const sql = `UPDATE user SET ${key}=? WHERE email=?`;
+
+  db.run(sql, [value, userId], function (err) {
+    if (err) {
+      console.log(`Failed to update ${key}`, err);
+      return;
+    }
+
+    cb(this.changes);
+  });
+};
+
 module.exports = {
   db,
   getUserByEmail,
   createUserRecord,
   getUserData,
   genUserData,
+  updateUserParam,
 };

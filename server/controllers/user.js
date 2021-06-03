@@ -5,6 +5,7 @@ const {
   createUserRecord,
   getUserData,
   genUserData,
+  updateUserParam,
 } = require("../database");
 const secret = require("../app.config").secret;
 
@@ -85,5 +86,41 @@ module.exports = {
     genUserData(userId, sampleSize);
 
     return res.status(200).json({ message: "Mock data created" });
+  },
+  updateUserAvatar(req, res) {
+    const { avatar, userId } = req.body;
+
+    console.log(avatar, userId);
+
+    getUserByEmail(userId, (user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      updateUserParam(userId, "avatar", avatar, (rows) => {
+        if (!rows) {
+          return res.status(500).json({ error: "Error uploading avatar" });
+        }
+
+        return res.status(200).json({ message: "Avatar updated" });
+      });
+    });
+  },
+  updateUserName(req, res) {
+    const { name, userId } = req.body;
+
+    getUserByEmail(userId, (user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      updateUserParam(userId, "name", name, (rows) => {
+        if (!rows) {
+          return res.status(500).json({ error: "Error changing name" });
+        }
+
+        return res.status(200).json({ message: "Name updated" });
+      });
+    });
   },
 };
