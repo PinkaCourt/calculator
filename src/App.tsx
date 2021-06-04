@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import Auth from "pages/Auth";
 import SignUp from "pages/SignUp";
 import Dashboard from "pages/Dashboard";
+import Profile from "pages/Profile";
 import { store } from "store/store";
 
 export const routes = {
@@ -23,6 +24,11 @@ export const routes = {
     path: "/dashboard",
     exact: false,
     component: Dashboard,
+  },
+  profile: {
+    path: "/profile",
+    exact: false,
+    component: Profile,
   },
 };
 

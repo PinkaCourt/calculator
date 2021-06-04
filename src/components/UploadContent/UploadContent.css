@@ -1,0 +1,26 @@
+.upload_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  justify-content: center;
+  align-content: center;
+  margin: 0 120px 40px 120px;
+  height: 100%;
+}
+
+.upload_img {
+  filter: grayscale(100%);
+}
+
+.download_button {
+  display: none;
+}
+
+.download_link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.upload_email {
+  background-color: var(--SidebarColor);
+}
