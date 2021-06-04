@@ -1,4 +1,4 @@
-import { call, fork, put, select, takeEvery } from "redux-saga/effects";
+import { call, fork, put, select, take, takeEvery } from "redux-saga/effects";
 
 import {
   signIn,
@@ -18,8 +18,8 @@ function* authorizationUser({
   const user: T.UserAuth = yield call(signIn, payload.login, payload.password);
   yield put(A.setLogin(payload.login));
   yield put(A.setAuth(user));
-  yield fork(A.getUserProfile);
-  yield fork(A.getUserData);
+  yield call(getUserProfile);
+  yield call(getUserData);
 }
 
 function* registerUser({ payload }: ReturnType<typeof A.registerUser>) {
@@ -52,7 +52,7 @@ function* updateUserAvatar(avatar: string) {
 
   const { message } = yield call(updateAvatar, userId, token, avatar);
 
-  yield fork(A.getUserProfile);
+  yield call(getUserProfile);
 }
 
 function* updateUserName(name: string) {
@@ -61,14 +61,14 @@ function* updateUserName(name: string) {
 
   const { message } = yield call(updateName, userId, token, name);
 
-  yield fork(A.getUserProfile);
+  yield call(A.getUserProfile);
 }
 
 export default function* fetchUser() {
   yield takeEvery(A.authorizationUser, authorizationUser);
   yield takeEvery(A.registerUser, registerUser);
-  yield takeEvery(A.getUserData, getUserData);
-  yield takeEvery(A.getUserProfile, getUserProfile);
+  //yield takeEvery(A.getUserData, getUserData);
+  // yield takeEvery(A.getUserProfile, getUserProfile);
   //yield takeEvery(A.updateUserAvatar, updateUserAvatar);
   //yield takeEvery(A.updateUserName, updateUserName);
 }
