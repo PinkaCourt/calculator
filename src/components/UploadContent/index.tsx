@@ -1,13 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { selectUser } from "store/selectors";
+import * as A from "store/actions";
+import * as S from "store/selectors";
+
 import "./UploadContent.css";
 
 const UploadContent = () => {
   const [name, setName] = React.useState("");
 
-  const user = useSelector(selectUser);
+  const user = useSelector(S.selectUser);
+
+  const dispatch = useDispatch();
 
   /*  const handleEmailChange = (event: { target: { value: string } }) => {
     setEmail(event.target.value);
@@ -15,6 +19,10 @@ const UploadContent = () => {
 
   const handleNameChange = (event: { target: { value: string } }) => {
     setName(event.target.value);
+  };
+
+  const handleUpload = () => {
+    dispatch(A.updateUserName(name));
   };
 
   return (
@@ -43,7 +51,9 @@ const UploadContent = () => {
           />
         </label>
       </div>
-      <button className="upload_button"> Upload</button>
+      <button className="upload_button" onClick={handleUpload}>
+        Upload
+      </button>
     </div>
   );
 };

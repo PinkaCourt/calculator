@@ -17,6 +17,6 @@ export const setUserData = createAction<T.Data[]>("setUserData");
 export const getUserProfile = createAction("getUserProfile");
 export const setUserProfile = createAction<T.User>("setUserProfile");
 
-export const updateUserAvatar = createAction("updateUserAvatar");
+export const updateUserAvatar = createAction<string>("updateUserAvatar");
 
-export const updateUserName = createAction("updateUserName");
+export const updateUserName = createAction<string>("updateUserName");

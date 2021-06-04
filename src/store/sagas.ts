@@ -46,29 +46,25 @@ function* getUserProfile() {
   yield put(A.setUserProfile(profile));
 }
 
-function* updateUserAvatar(avatar: string) {
+function* updateUserAvatar({ payload }: ReturnType<typeof A.updateUserAvatar>) {
   const userId: ReturnType<typeof S.selectLogin> = yield select(S.selectLogin);
   const token: ReturnType<typeof S.selectToken> = yield select(S.selectToken);
 
-  const { message } = yield call(updateAvatar, userId, token, avatar);
-
+  yield call(updateAvatar, userId, token, payload);
   yield call(getUserProfile);
 }
 
-function* updateUserName(name: string) {
+function* updateUserName({ payload }: ReturnType<typeof A.updateUserName>) {
   const userId: ReturnType<typeof S.selectLogin> = yield select(S.selectLogin);
   const token: ReturnType<typeof S.selectToken> = yield select(S.selectToken);
 
-  const { message } = yield call(updateName, userId, token, name);
-
-  yield call(A.getUserProfile);
+  yield call(updateName, userId, token, payload);
+  yield call(getUserProfile);
 }
 
 export default function* fetchUser() {
   yield takeEvery(A.authorizationUser, authorizationUser);
   yield takeEvery(A.registerUser, registerUser);
-  //yield takeEvery(A.getUserData, getUserData);
-  // yield takeEvery(A.getUserProfile, getUserProfile);
-  //yield takeEvery(A.updateUserAvatar, updateUserAvatar);
-  //yield takeEvery(A.updateUserName, updateUserName);
+  yield takeEvery(A.updateUserAvatar, updateUserAvatar);
+  yield takeEvery(A.updateUserName, updateUserName);
 }
