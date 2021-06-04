@@ -23,4 +23,5 @@
   text-align: center;
   font: normal 14px "Roboto Mono", sans-serif;
   cursor: default;
+  z-index: 1;
 }

@@ -6,14 +6,5 @@
   align-content: center;
   margin: 0 120px 40px 120px;
   height: 100%;
+  overflow-y: scroll;
 }
-/*
-.widgetContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex: 1 0 auto;
-  margin: 15px auto;
-  background-color: greenyellow;
-}
-*/
