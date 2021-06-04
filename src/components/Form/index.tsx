@@ -39,9 +39,7 @@ const Form: React.FC<Props> = (props) => {
         path: routes.auth.path,
       };
 
-  const handleLoginChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handleLoginChange = (event: { target: { value: string } }) => {
     setLogin(event.target.value);
   };
 
@@ -96,31 +94,28 @@ const Form: React.FC<Props> = (props) => {
   }, [auth, history, token]);
 
   return (
-    <form className={"form"} onSubmit={handleClick}>
+    <form className="form" onSubmit={handleClick}>
       <input
-        className={"input"}
+        className="input"
         type="email"
         name="email"
         placeholder="Email"
-        autoComplete={"off"}
         required
         onChange={handleLoginChange}
       />
       <input
-        className={"input"}
+        className="input"
         type="password"
         name="password"
         placeholder="Password"
-        autoComplete={"off"}
         onChange={handlePasswordChange}
       />
       {!autorization && (
         <input
-          className={"input"}
+          className="input"
           type="password"
           name="password"
           placeholder="Password"
-          autoComplete={"off"}
           onChange={handleConfirmPasswordChange}
         />
       )}
@@ -133,7 +128,7 @@ const Form: React.FC<Props> = (props) => {
       </button>
       <span className="link">
         {signature.span}
-        <a href={signature.path} className={"link-reg"}>
+        <a href={signature.path} className="link-reg">
           {signature.link}
         </a>
       </span>
