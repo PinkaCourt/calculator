@@ -1,17 +1,8 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import * as A from "store/actions";
 import { selectUser } from "store/selectors";
-import { routes } from "App";
 import "./UserInfo.css";
-
-type Props = {
-  avatar: string;
-  email: string;
-  name: string;
-};
 
 const UserInfo = () => {
   const user = useSelector(selectUser);
@@ -19,17 +10,11 @@ const UserInfo = () => {
   if (user === null) {
     return null;
   }
-  //const UserInfo: React.FC<Props> = (props) => {
-  //  const { avatar, email, name } = props;
-  const avatar = "";
-  const email = "email@mail.com";
-  const name = "Name";
 
-  //<img src="/ava.jpg" alt="image" />
+  const { avatar, email, name } = user;
 
-  const source = `data:image/gif;base64,${avatar}`;
-
-  //React.useEffect(() => {}, []);
+  const source =
+    user.avatar === null ? "/ava.jpg" : `data:image/gif;base64,${avatar}`;
 
   return (
     <div className={"userInfo"}>
@@ -37,11 +22,9 @@ const UserInfo = () => {
         <span className={"userInfo_name"}>{name}</span>
         <span className={"userInfo_email"}>{email} </span>
       </div>
-      <img className={"userInfo_img"} src={"/ava.jpg"} />
+      <img className={"userInfo_img"} src={source} alt={"avatar"} />
     </div>
   );
 };
 
 export default UserInfo;
-
-//<img className={"userInfo_img"} src={source} />

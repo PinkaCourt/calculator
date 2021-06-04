@@ -21,7 +21,7 @@ export type serverDataUser = {
 };
 
 export type User = {
-  avatar: null;
+  avatar: null | string;
   email: string;
   name: null;
 };
