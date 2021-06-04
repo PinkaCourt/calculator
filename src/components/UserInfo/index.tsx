@@ -14,6 +14,11 @@ type Props = {
 };
 
 const UserInfo = () => {
+  const user = useSelector(selectUser);
+
+  if (user === null) {
+    return null;
+  }
   //const UserInfo: React.FC<Props> = (props) => {
   //  const { avatar, email, name } = props;
   const avatar = "";
@@ -24,7 +29,7 @@ const UserInfo = () => {
 
   const source = `data:image/gif;base64,${avatar}`;
 
-  React.useEffect(() => {}, []);
+  //React.useEffect(() => {}, []);
 
   return (
     <div className={"userInfo"}>

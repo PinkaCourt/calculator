@@ -17,13 +17,11 @@
 .userInfo_name {
   color: var(--BlackColor);
   font: normal 26px "Roboto Mono", sans-serif;
-  /*margin: 10px 0 0 0;*/
 }
 
 .userInfo_email {
   color: var(--BorderColor);
   font: normal 16px "Roboto Mono", sans-serif;
-  /*margin: 10px 0 0 0;*/
 }
 
 .userInfo_img {

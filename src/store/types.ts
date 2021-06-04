@@ -1,4 +1,4 @@
-export type User = {
+export type UserAuth = {
   accessToken: string;
   auth: boolean;
   avatar: null;
@@ -18,4 +18,10 @@ export type Data = {
 export type serverDataUser = {
   items: Data[];
   message: string;
+};
+
+export type User = {
+  avatar: null;
+  email: string;
+  name: null;
 };
