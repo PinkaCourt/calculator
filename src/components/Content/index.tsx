@@ -56,6 +56,7 @@ const Content = () => {
     <div className={"content_container"}>
       {widgets.map((widget) => (
         <Widget
+          key={widget.name}
           name={widget.name}
           data={widget.data}
           average={widget.average}
