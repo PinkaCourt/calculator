@@ -19,6 +19,7 @@
   height: 377px;
   filter: grayscale(100%);
   margin: 0 0 20px 0;
+  object-fit: cover;
 }
 
 .chouse_button {
