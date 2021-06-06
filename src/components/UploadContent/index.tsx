@@ -9,8 +9,8 @@ const UploadContent = () => {
   const [changedName, setChangedName] = React.useState("");
   const [fileName, setFileName] = React.useState("Upload new");
   const [URL, setURL] = React.useState("");
-  const [uploadedFile, setUploadedFile] =
-    React.useState<string | ArrayBuffer | null>(null);
+  //const [dataType, setDataType] = React.useState("image/jpeg");
+  const [uploadedFile, setUploadedFile] = React.useState<string>("");
 
   const fileInput = React.createRef<HTMLInputElement>();
 
@@ -23,7 +23,7 @@ const UploadContent = () => {
 
   const handleUpload = () => {
     if (uploadedFile !== null) {
-      //dispatch(A.updateUserAvatar(uploadedFile));
+      dispatch(A.updateUserAvatar(uploadedFile));
     }
     dispatch(A.updateUserName(changedName));
   };
@@ -39,9 +39,12 @@ const UploadContent = () => {
     const file = contentFiles[0];
     const reader = new FileReader();
     reader.onloadend = function () {
-      const url = reader.result;
+      const fullUrl = String(reader.result);
+      const dataBase64 = fullUrl.split(",")[1];
+      //const dataType = fullUrl.split(":")[1].split(";")[0];
+      //setDataType(dataType);
       setFileName(file.name);
-      setUploadedFile(url);
+      setUploadedFile(dataBase64);
     };
     reader.readAsDataURL(file);
   };
@@ -56,7 +59,9 @@ const UploadContent = () => {
       setChangedName(name);
     }
 
-    const src = avatar === null ? "/ava.jpg" : avatar;
+    const src =
+      avatar === null ? "/ava.jpg" : `data:image/jpeg;base64,${avatar}`;
+
     setURL(src);
   }, [user]);
 
