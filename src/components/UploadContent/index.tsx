@@ -3,37 +3,79 @@ import { useSelector, useDispatch } from "react-redux";
 
 import * as A from "store/actions";
 import * as S from "store/selectors";
-
 import "./UploadContent.css";
 
 const UploadContent = () => {
-  const [name, setName] = React.useState("");
+  const [changedName, setChangedName] = React.useState("");
+  const [URL, setURL] = React.useState("");
+  const [uploadedFile, setUploadedFile] =
+    React.useState<string | ArrayBuffer | null>(null);
+  const fileInput = React.createRef<HTMLInputElement>();
 
   const user = useSelector(S.selectUser);
-
   const dispatch = useDispatch();
 
-  /*  const handleEmailChange = (event: { target: { value: string } }) => {
-    setEmail(event.target.value);
-  };*/
-
   const handleNameChange = (event: { target: { value: string } }) => {
-    setName(event.target.value);
+    setChangedName(event.target.value);
   };
 
   const handleUpload = () => {
-    dispatch(A.updateUserName(name));
+    if (uploadedFile !== null) {
+      //dispatch(A.updateUserAvatar(uploadedFile))
+    }
+    dispatch(A.updateUserName(changedName));
   };
+
+  const encodeImageFileAsURL = () => {
+    const { current } = fileInput;
+    const contentFiles = current && current.files;
+
+    if (!contentFiles) {
+      return;
+    }
+
+    const file = contentFiles[0];
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      const url = reader.result;
+      setUploadedFile(url);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  React.useEffect(() => {
+    if (!user) {
+      return;
+    }
+    const { name, avatar } = user;
+
+    if (name !== null) {
+      setChangedName(name);
+    }
+
+    const src = avatar === null ? "/ava.jpg" : avatar;
+    setURL(src);
+  }, [user]);
+
+  console.log("URL", URL);
+  console.log("user", user);
 
   return (
     <div className="upload_container">
       <div className="chouse_container">
-        <img className="upload_img" src="/ava.jpg" alt="dick pic" />
+        <img
+          className="upload_img"
+          // src="/ava.jpg"
+          src={URL}
+          alt="dick pic"
+        />
         <label className="chouse_link">
           <input
             className="chouse_button"
             type="file"
             accept="image/jpeg,image/png"
+            onChange={encodeImageFileAsURL}
+            ref={fileInput}
           />
           Upload new
         </label>
@@ -47,7 +89,7 @@ const UploadContent = () => {
             className="upload_name"
             onChange={handleNameChange}
             autoComplete="on"
-            value={name}
+            value={changedName}
           />
         </label>
       </div>
