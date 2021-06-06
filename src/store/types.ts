@@ -1,7 +1,7 @@
 export type UserAuth = {
   accessToken: string;
   auth: boolean;
-  avatar: null;
+  avatar: null | string;
   email: string;
   name: null;
 };
@@ -23,5 +23,5 @@ export type serverDataUser = {
 export type User = {
   avatar: null | string;
   email: string;
-  name: null;
+  name: null | string;
 };
