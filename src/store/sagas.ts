@@ -1,4 +1,4 @@
-import { call, fork, put, select, take, takeEvery } from "redux-saga/effects";
+import { call, fork, put, select, takeEvery } from "redux-saga/effects";
 
 import {
   signIn,
