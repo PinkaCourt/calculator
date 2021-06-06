@@ -7,9 +7,11 @@ import "./UploadContent.css";
 
 const UploadContent = () => {
   const [changedName, setChangedName] = React.useState("");
+  const [fileName, setFileName] = React.useState("Upload new");
   const [URL, setURL] = React.useState("");
   const [uploadedFile, setUploadedFile] =
     React.useState<string | ArrayBuffer | null>(null);
+
   const fileInput = React.createRef<HTMLInputElement>();
 
   const user = useSelector(S.selectUser);
@@ -21,7 +23,7 @@ const UploadContent = () => {
 
   const handleUpload = () => {
     if (uploadedFile !== null) {
-      //dispatch(A.updateUserAvatar(uploadedFile))
+      //dispatch(A.updateUserAvatar(uploadedFile));
     }
     dispatch(A.updateUserName(changedName));
   };
@@ -38,6 +40,7 @@ const UploadContent = () => {
     const reader = new FileReader();
     reader.onloadend = function () {
       const url = reader.result;
+      setFileName(file.name);
       setUploadedFile(url);
     };
     reader.readAsDataURL(file);
@@ -57,18 +60,10 @@ const UploadContent = () => {
     setURL(src);
   }, [user]);
 
-  console.log("URL", URL);
-  console.log("user", user);
-
   return (
     <div className="upload_container">
       <div className="chouse_container">
-        <img
-          className="upload_img"
-          // src="/ava.jpg"
-          src={URL}
-          alt="dick pic"
-        />
+        <img className="upload_img" src={URL} alt="dick pic" />
         <label className="chouse_link">
           <input
             className="chouse_button"
@@ -77,7 +72,7 @@ const UploadContent = () => {
             onChange={encodeImageFileAsURL}
             ref={fileInput}
           />
-          Upload new
+          {fileName}
         </label>
         <label className="upload_label">
           email
