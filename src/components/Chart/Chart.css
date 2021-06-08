@@ -1,7 +1,12 @@
 .chart {
   flex: 2 0 300px;
   margin: 10px;
-  min-width: 500px;
+  min-width: 600px;
   height: 40%;
   background-color: var(--widgetColor);
+}
+
+.canvas_legend {
+  font: normal 24px "Roboto Mono", sans-serif;
+  color: var(--BorderColor);
 }
