@@ -19,6 +19,10 @@
   text-decoration: none;
 }
 
+.sidebar_link.active {
+  font: bold 24px "Roboto Mono", sans-serif;
+}
+
 .sidebar_link-selected {
   font: bold 24px "Roboto Mono", sans-serif;
 }
@@ -29,4 +33,7 @@
   bottom: 10px;
   font: normal 24px "Roboto Mono", sans-serif;
   text-decoration: none;
+}
+
+.sidebar_button {
 }
