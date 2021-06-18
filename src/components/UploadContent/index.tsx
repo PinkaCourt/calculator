@@ -41,8 +41,6 @@ const UploadContent = () => {
     reader.onloadend = function () {
       const fullUrl = String(reader.result);
       const dataBase64 = fullUrl.split(",")[1];
-      //const dataType = fullUrl.split(":")[1].split(";")[0];
-      //setDataType(dataType);
       setFileName(file.name);
       setUploadedFile(dataBase64);
     };
