@@ -3,9 +3,7 @@
   flex-wrap: wrap;
   flex-basis: auto;
   justify-content: space-between;
-  margin: 60px;
-  height: 100%;
-  padding: 0 120px;
+  margin: 30px 500px 0 20px;
 }
 
 .chouse_container {
@@ -42,7 +40,7 @@
 .upload_email {
   width: 377px;
   height: 60px;
-  margin: 0 0 40px 0;
+  margin: 0 20px 40px 0;
   border: 1px solid var(--BlackColor);
   box-sizing: border-box;
   background-color: var(--SidebarColor);
@@ -67,12 +65,32 @@
   width: 377px;
   height: 60px;
   text-align: center;
-  position: absolute;
-  right: 220px;
-  bottom: 60px;
+  margin: 0 0 0 500px;
   border: 1px solid var(--BlackColor);
   box-sizing: border-box;
   background-color: var(--widgetColor);
   font: normal 18px "Roboto Mono", sans-serif;
   color: var(--BlackColor);
+}
+
+@media only screen and (max-width: 992px) {
+  .upload_container {
+    margin: 10px auto;
+  }
+
+  .chouse_container,
+  .upload_email,
+  .upload_name {
+    margin: 0;
+  }
+
+  .chouse_link {
+    margin: 0 auto;
+  }
+
+  .upload_button {
+    margin: 0;
+    position: inherit;
+    font-size: 14px;
+  }
 }

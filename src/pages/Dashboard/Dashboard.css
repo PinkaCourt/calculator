@@ -17,3 +17,11 @@
   justify-content: space-between;
   flex: 1 1 auto;
 }
+
+@media only screen and (max-width: 992px) {
+  .body_container {
+  }
+
+  .dashboard_data_container {
+  }
+}
