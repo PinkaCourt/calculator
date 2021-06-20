@@ -29,3 +29,26 @@
   border-radius: 50%;
   filter: grayscale(100%);
 }
+
+@media only screen and (max-width: 992px) {
+  .userInfo {
+    padding: 1px 2px;
+    cursor: default;
+  }
+
+  .userInfo_container {
+    margin: 0 5px 0 0;
+  }
+
+  .userInfo_name {
+    font-size: 14px;
+  }
+
+  .userInfo_email {
+    font-size: 12px;
+  }
+
+  .userInfo_img {
+    height: 35px;
+  }
+}
