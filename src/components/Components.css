@@ -25,3 +25,19 @@
   cursor: default;
   z-index: 1;
 }
+
+@media only screen and (max-width: 992px) {
+  .logo {
+    top: 10px;
+    left: 10px;
+  }
+
+  .header {
+    min-height: 40px;
+    font: normal 16px "Reem Kufi", sans-serif;
+  }
+
+  .footer {
+    font: normal 10px "Roboto Mono", sans-serif;
+  }
+}
