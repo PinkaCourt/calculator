@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectAuth } from "store/selectors";
 import UserInfo from "components/UserInfo";
 import Logo from "components/Logo";
+import SidebarButton from "components/SidebarButton";
 import "components/Components.css";
 
 const Header = () => {
@@ -12,7 +13,12 @@ const Header = () => {
   return (
     <header className={"header"}>
       <Logo />
-      {auth && <UserInfo />}
+      {auth && (
+        <>
+          <SidebarButton />
+          <UserInfo />
+        </>
+      )}
     </header>
   );
 };
