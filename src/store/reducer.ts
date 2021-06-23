@@ -34,6 +34,10 @@ export const dashboardReducer = createReducer(initeState, (builder) => {
       state.data = payload;
     })
     .addCase(A.setLogout, (state) => {
+      state.accessToken = "";
       state.auth = false;
+      state.login = "";
+      state.user = null;
+      state.data = [];
     });
 });
