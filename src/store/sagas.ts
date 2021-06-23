@@ -16,10 +16,15 @@ function* authorizationUser({
   payload,
 }: ReturnType<typeof A.authorizationUser>) {
   const user: T.UserAuth = yield call(signIn, payload.login, payload.password);
-  yield put(A.setLogin(payload.login));
-  yield put(A.setAuth(user));
-  yield call(getUserProfile);
-  yield call(getUserData);
+
+  if (!user.error) {
+    yield put(A.setLogin(payload.login));
+    yield put(A.setAuth(user));
+    yield call(getUserProfile);
+    yield call(getUserData);
+  } else {
+    yield put(A.setLogout());
+  }
 }
 
 function* registerUser({ payload }: ReturnType<typeof A.registerUser>) {

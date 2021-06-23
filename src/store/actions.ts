@@ -4,8 +4,8 @@ import * as T from "store/types";
 export const authorizationUser =
   createAction<{ login: string; password: string }>("authorizationUser");
 
-// должно быть только  accessToken и  auth
 export const setAuth = createAction<T.UserAuth>("setAuth");
+export const setLogout = createAction("setLogout");
 export const setLogin = createAction<string>("setLogin");
 
 export const registerUser =

@@ -4,6 +4,7 @@ export type UserAuth = {
   avatar: null | string;
   email: string;
   name: null;
+  error?: string;
 };
 
 export type Data = {

@@ -32,5 +32,8 @@ export const dashboardReducer = createReducer(initeState, (builder) => {
     })
     .addCase(A.setUserData, (state, { payload }) => {
       state.data = payload;
+    })
+    .addCase(A.setLogout, (state) => {
+      state.auth = false;
     });
 });
