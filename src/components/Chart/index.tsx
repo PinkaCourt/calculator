@@ -5,11 +5,7 @@ import { selectData } from "store/selectors";
 import * as T from "store/types";
 import "./Chart.css";
 
-const a = 20;
-const b = 15;
-const c = 23;
-const d = 25;
-let scale = 30;
+const initIndent = 80;
 const step = 10;
 
 const startPeriod = new Date().setMonth(new Date().getMonth() - 4);
@@ -24,13 +20,12 @@ const toGraf = (
   height: number
 ) => {
   ctx.beginPath();
-  ctx.moveTo(0, height);
+  ctx.moveTo(initIndent, height - initIndent);
 
   array.reduce((accumulator, currentValue) => {
-    ctx.lineTo(accumulator, height - currentValue);
-    ctx.moveTo(accumulator, height - currentValue);
+    ctx.lineTo(accumulator, height - initIndent - currentValue);
     return (accumulator = accumulator + step);
-  }, 0);
+  }, initIndent);
 
   ctx.stroke();
   ctx.closePath();
@@ -89,7 +84,11 @@ const Chart = () => {
     if (ctx == null) {
       return;
     }
-
+    const Y = [
+      { text: "20", x: 40, y: 1 * 80 + 60 },
+      { text: "10", x: 40, y: 2 * 80 + 60 },
+      { text: "0", x: 40, y: 3 * 80 + 60 },
+    ];
     ctx.fillStyle = "black";
     ctx.lineWidth = 5.0;
     ctx.beginPath();
@@ -102,12 +101,13 @@ const Chart = () => {
     ctx.closePath();
 
     const igogo = averageDSbyMonth(dataForFourMonths).slice().reverse();
-
+    console.log("igogo", igogo);
     toGraf(
       ctx,
       igogo.map((e) => e.ds),
       canvasHeight
     );
+    Y.map((e) => ctx.fillText(e.text, e.x, e.y));
   }, [dataForFourMonths]);
 
   return (
