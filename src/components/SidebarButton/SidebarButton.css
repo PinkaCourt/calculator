@@ -1,0 +1,47 @@
+.sidebar_button {
+  display: none;
+}
+
+.sidebar_list {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 40px;
+  right: 150px;
+  width: 100px;
+  margin: 5px 0;
+  background-color: var(--WhiteColor);
+  color: var(--UltraBlackColor);
+  z-index: 2;
+}
+
+.sidebar_list-link {
+  margin: 5px 0;
+  padding: 0 5px;
+  font: normal 14px "Roboto Mono", sans-serif;
+  color: var(--UltraBlackColor);
+}
+/*эта не работает*/
+.sidebar_list-link:active {
+  font-weight: bold;
+}
+
+.sidebar_button:hover {
+  border: 1px solid var(--BorderColor);
+}
+
+@media only screen and (max-width: 992px) {
+  .sidebar_button {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 150px;
+    width: 100px;
+    min-height: 40px;
+    background-color: var(--HeaderColor);
+    cursor: pointer;
+    margin: auto 0;
+    box-sizing: border-box;
+    border: 1px solid var(--FooterColor);
+  }
+}
