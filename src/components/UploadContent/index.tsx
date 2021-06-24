@@ -9,7 +9,6 @@ const UploadContent = () => {
   const [changedName, setChangedName] = React.useState("");
   const [fileName, setFileName] = React.useState("Upload new");
   const [URL, setURL] = React.useState("");
-  //const [dataType, setDataType] = React.useState("image/jpeg");
   const [uploadedFile, setUploadedFile] = React.useState<string>("");
 
   const fileInput = React.createRef<HTMLInputElement>();
@@ -22,10 +21,13 @@ const UploadContent = () => {
   };
 
   const handleUpload = () => {
-    if (uploadedFile !== null) {
+    if (fileName !== "Upload new") {
       dispatch(A.updateUserAvatar(uploadedFile));
     }
-    dispatch(A.updateUserName(changedName));
+
+    if (changedName !== "") {
+      dispatch(A.updateUserName(changedName));
+    }
   };
 
   const encodeImageFileAsURL = () => {
@@ -64,37 +66,39 @@ const UploadContent = () => {
   }, [user]);
 
   return (
-    <div className="upload_container">
-      <div className="chouse_container">
-        <img className="upload_img" src={URL} alt="dick pic" />
-        <label className="chouse_link">
-          <input
-            className="chouse_button"
-            type="file"
-            accept="image/jpeg,image/png"
-            onChange={encodeImageFileAsURL}
-            ref={fileInput}
-          />
-          {fileName}
-        </label>
-        <label className="upload_label">
-          email
-          <input className="upload_email" value={user?.email} readOnly />
-        </label>
-        <label className="upload_label">
-          name
-          <input
-            className="upload_name"
-            onChange={handleNameChange}
-            autoComplete="on"
-            value={changedName}
-          />
-        </label>
+    <>
+      <div className="upload_container">
+        <div className="chouse_container">
+          <img className="upload_img" src={URL} alt="dick pic" />
+          <label className="chouse_link">
+            <input
+              className="chouse_button"
+              type="file"
+              accept="image/jpeg,image/png"
+              onChange={encodeImageFileAsURL}
+              ref={fileInput}
+            />
+            {fileName}
+          </label>
+          <label className="upload_label">
+            email
+            <input className="upload_email" value={user?.email} readOnly />
+          </label>
+          <label className="upload_label">
+            name
+            <input
+              className="upload_name"
+              onChange={handleNameChange}
+              autoComplete="on"
+              value={changedName}
+            />
+          </label>
+        </div>
       </div>
       <button className="upload_button" onClick={handleUpload}>
         Upload
       </button>
-    </div>
+    </>
   );
 };
 
