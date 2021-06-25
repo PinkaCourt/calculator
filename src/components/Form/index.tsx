@@ -6,24 +6,7 @@ import * as A from "store/actions";
 import * as S from "store/selectors";
 import { routes } from "App";
 import "./Form.css";
-/*
-function validation(login) {
-  if (/^[a-zA-Z1-9]+$/.test(login) === false) {
-    alert("В логине должны быть только латинские буквы");
-    return false;
-  }
-  if (login.length < 4 || login.length > 20) {
-    alert("В логине должен быть от 4 до 20 символов");
-    return false;
-  }
-  if (parseInt(login.substr(0, 1))) {
-    alert("Логине должен начинаться с буквы");
-    return false;
-  }
 
-  return true;
-}
-*/
 type Props = {
   autorization: boolean;
 };
