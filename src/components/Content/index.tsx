@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { selectData } from "store/selectors";
+import { lastDatas, monthlyData } from "store/selectors";
 import Widget from "components/Widget";
 import Chart from "components/Chart";
 import "./Content.css";
+
+const toNormalize = (value: string) => {
+  return parseFloat(value).toFixed(2);
+};
 
 const toAverage = (data: string[]) => {
   const { length } = data;
@@ -14,41 +18,29 @@ const toAverage = (data: string[]) => {
   return average;
 };
 
-const toNormalize = (value: string) => {
-  return parseFloat(value).toFixed(2);
-};
-
-const startPeriod = new Date().setMonth(new Date().getMonth() - 1);
-const endPeriod = Date.now();
-
 const Content = () => {
-  const data = useSelector(selectData);
+  const lastData = useSelector(lastDatas);
+  const lastMonthlyData = useSelector(monthlyData);
 
-  if (data.length === 0) {
+  if (!lastData) {
     return null;
   }
-
-  const monthlyData = data.filter(
-    (mnt) => mnt.date > startPeriod && mnt.date < endPeriod
-  );
-
-  const lastDatas = monthlyData[0];
 
   const widgets = [
     {
       name: "DICK SIZE, cm",
-      data: toNormalize(lastDatas.ds),
-      average: toAverage(monthlyData.map((e) => e.ds)),
+      data: toNormalize(lastData.ds),
+      average: toAverage(lastMonthlyData.map((e) => e.ds)),
     },
     {
       name: "ANAL SIZE, cm",
-      data: toNormalize(lastDatas.ans),
-      average: toAverage(monthlyData.map((e) => e.ans)),
+      data: toNormalize(lastData.ans),
+      average: toAverage(lastMonthlyData.map((e) => e.ans)),
     },
     {
       name: "WILL TO LIVE, %",
-      data: toNormalize(lastDatas.wtl),
-      average: toAverage(monthlyData.map((e) => e.wtl)),
+      data: toNormalize(lastData.wtl),
+      average: toAverage(lastMonthlyData.map((e) => e.wtl)),
     },
   ];
 
