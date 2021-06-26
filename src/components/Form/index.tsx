@@ -24,6 +24,7 @@ const Form: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector(S.selectAuth);
   const token = useSelector(S.selectToken);
+  const userId = useSelector(S.selectLogin);
 
   const signature = autorization
     ? {
@@ -62,7 +63,7 @@ const Form: React.FC<Props> = (props) => {
       dispatch(A.registerUser({ login, password }));
     }
   };
-
+  // валидация
   React.useEffect(() => {
     const pwdMatch = confirmPassword === password;
     const fieldsFilled = Boolean(login.length && password.length);
@@ -86,12 +87,40 @@ const Form: React.FC<Props> = (props) => {
     }
   }, [autorization, login, password, confirmPassword, formValid]);
 
+  // проверяем кукис
+  React.useEffect(() => {
+    const allCookies = document.cookie;
+
+    if (allCookies === "") {
+      return;
+    }
+
+    let cookies = new Map();
+
+    document.cookie.split("; ").forEach((e) => {
+      const pair = e.split("=");
+      const name = pair[0];
+      const value = pair[1];
+      cookies.set(name, value);
+    });
+
+    if (cookies.get("accessToken") !== "") {
+      dispatch(A.setLogin(cookies.get("login")));
+      dispatch(A.setToken(cookies.get("accessToken")));
+      dispatch(A.getUserProfile());
+      dispatch(A.getUserData());
+    }
+  }, [auth, dispatch, history, login, token]);
+
+  // установка кукис
   React.useEffect(() => {
     if (auth) {
-      document.cookie = `accessToken=${token};max-age=864e2`;
+      document.cookie = `accessToken=${token}; max-age=864e2`;
+      document.cookie = `login=${userId}`;
+
       history.push("/dashboard");
     }
-  }, [auth, history, token]);
+  }, [auth, history, login, token, userId]);
 
   return (
     <form className="form" onSubmit={handleClick}>

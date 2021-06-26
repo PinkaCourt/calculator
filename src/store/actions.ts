@@ -4,10 +4,11 @@ import * as T from "store/types";
 export const authorizationUser =
   createAction<{ login: string; password: string }>("authorizationUser");
 
-export const setAuth = createAction<T.UserAuth>("setAuth");
+export const setAuth = createAction<boolean>("setAuth");
 export const setLogout = createAction("setLogout");
 export const setLogin = createAction<string>("setLogin");
 
+export const setToken = createAction<string>("setToken");
 export const registerUser =
   createAction<{ login: string; password: string }>("registerUser");
 

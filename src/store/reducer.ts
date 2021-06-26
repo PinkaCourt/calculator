@@ -20,9 +20,11 @@ const initeState: IniteState = {
 
 export const dashboardReducer = createReducer(initeState, (builder) => {
   builder
+    .addCase(A.setToken, (state, { payload }) => {
+      state.accessToken = payload;
+    })
     .addCase(A.setAuth, (state, { payload }) => {
-      state.accessToken = payload.accessToken;
-      state.auth = payload.auth;
+      state.auth = payload;
     })
     .addCase(A.setLogin, (state, { payload }) => {
       state.login = payload;

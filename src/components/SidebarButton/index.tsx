@@ -18,7 +18,9 @@ const SidebarButton = () => {
   const toggleLocation = () => {};
 
   const logout = () => {
-    dispatch(A.authorizationUser({ login: "", password: "" }));
+    document.cookie = `accessToken=; max-age=-1`;
+    document.cookie = `login=; max-age=-1`;
+    dispatch(A.setLogout());
   };
 
   return (

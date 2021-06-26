@@ -18,17 +18,16 @@ function* authorizationUser({
   const user: T.UserAuth = yield call(signIn, payload.login, payload.password);
 
   if (!user.error) {
+    yield put(A.setToken(user.accessToken));
     yield put(A.setLogin(payload.login));
-    yield put(A.setAuth(user));
+    yield put(A.setAuth(true));
     yield call(getUserProfile);
     yield call(getUserData);
-  } else {
-    yield put(A.setLogout());
   }
 }
 
 function* registerUser({ payload }: ReturnType<typeof A.registerUser>) {
-  const { message } = yield call(signUp, payload.login, payload.password);
+  yield call(signUp, payload.login, payload.password);
 
   yield fork(A.authorizationUser, payload);
 }
@@ -48,7 +47,11 @@ function* getUserProfile() {
 
   const profile: T.User = yield call(getProfile, userId, token);
 
+  if (!profile) {
+    return;
+  }
   yield put(A.setUserProfile(profile));
+  yield put(A.setAuth(true));
 }
 
 function* updateUserAvatar({ payload }: ReturnType<typeof A.updateUserAvatar>) {
@@ -72,4 +75,6 @@ export default function* fetchUser() {
   yield takeEvery(A.registerUser, registerUser);
   yield takeEvery(A.updateUserAvatar, updateUserAvatar);
   yield takeEvery(A.updateUserName, updateUserName);
+  yield takeEvery(A.getUserProfile, getUserProfile);
+  yield takeEvery(A.getUserData, getUserData);
 }
