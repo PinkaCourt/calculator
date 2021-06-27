@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 import { selectAverageDatas } from "store/selectors";
 import "./Chart.css";
 
-const initIndent = 80;
 const step = 10;
 
+const initIndent = 80;
+const initX = 2 * step;
+const initY = 4 * step;
+
 const canvasHeight = 300; //current && current.height;
-const canvasWidth = 512; //current && current.width;
+const canvasWidth = 500; //current && current.width;
 
 const toGraf = (
   ctx: CanvasRenderingContext2D,
@@ -39,11 +42,14 @@ const Chart = () => {
     if (ctx == null) {
       return;
     }
+
     const Y = [
       { text: "20", x: 40, y: 1 * 80 + 60 },
       { text: "10", x: 40, y: 2 * 80 + 60 },
       { text: "0", x: 40, y: 3 * 80 + 60 },
     ];
+
+    // начало рисования осей
     ctx.fillStyle = "black";
     ctx.lineWidth = 5.0;
     ctx.beginPath();
@@ -54,18 +60,22 @@ const Chart = () => {
     ctx.lineTo(canvasWidth, canvasHeight);
     ctx.stroke();
     ctx.closePath();
-
+    //конец осей
     toGraf(
       ctx,
       averageDatas.map((e) => e.ds),
       canvasHeight
     );
     Y.map((e) => ctx.fillText(e.text, e.x, e.y));
+
+    // стилизуем надпись
+    ctx.fillStyle = "#666666";
+    ctx.font = 'normal 24px "Roboto Mono"';
+    ctx.fillText("CLIENTS", initX, initY);
   }, [averageDatas]);
 
   return (
     <div className="chart">
-      <span className="canvas_legend"> clients </span>
       <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />
     </div>
   );

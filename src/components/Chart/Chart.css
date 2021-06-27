@@ -1,25 +1,15 @@
 .chart {
-  flex: 1 0 700px;
+  flex: 1 0 auto;
   margin: 10px;
   height: 45%;
   background-color: var(--widgetColor);
 }
 
-.canvas_legend {
-  font: normal 24px "Roboto Mono", sans-serif;
-  text-transform: uppercase;
-  color: var(--BorderColor);
-}
-
 @media only screen and (max-width: 992px) {
   .chart {
-    flex: 1 0 700px;
+    flex: 1 0 auto;
     margin: 10px;
     height: 45%;
     background-color: var(--widgetColor);
-  }
-
-  .canvas_legend {
-    font-size: 14px;
   }
 }
