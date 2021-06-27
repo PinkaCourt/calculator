@@ -12,12 +12,43 @@ import * as A from "store/actions";
 import * as S from "store/selectors";
 import * as T from "store/types";
 
+function* checkingCookies() {
+  const allCookies = document.cookie;
+
+  if (allCookies === "") {
+    return;
+  }
+
+  let cookies = new Map();
+
+  allCookies.split("; ").forEach((e) => {
+    const pair = e.split("=");
+    const name = pair[0];
+    const value = pair[1];
+    cookies.set(name, value);
+  });
+
+  if (
+    cookies.get("accessToken") !== "" &&
+    cookies.get("accessToken") !== "undefined"
+  ) {
+    yield put(A.setLogin(cookies.get("login")));
+    yield put(A.setToken(cookies.get("accessToken")));
+    yield put(A.setAuth(true));
+    yield put(A.getUserProfile());
+    yield put(A.getUserData());
+  }
+}
+
 function* authorizationUser({
   payload,
 }: ReturnType<typeof A.authorizationUser>) {
   const user: T.UserAuth = yield call(signIn, payload.login, payload.password);
 
   if (!user.error) {
+    document.cookie = `accessToken=${user.accessToken}; max-age=864e2`;
+    document.cookie = `login=${payload.login}`;
+
     yield put(A.setToken(user.accessToken));
     yield put(A.setLogin(payload.login));
     yield put(A.setAuth(true));
@@ -51,7 +82,6 @@ function* getUserProfile() {
     return;
   }
   yield put(A.setUserProfile(profile));
-  yield put(A.setAuth(true));
 }
 
 function* updateUserAvatar({ payload }: ReturnType<typeof A.updateUserAvatar>) {
@@ -71,6 +101,7 @@ function* updateUserName({ payload }: ReturnType<typeof A.updateUserName>) {
 }
 
 export default function* fetchUser() {
+  yield fork(checkingCookies);
   yield takeEvery(A.authorizationUser, authorizationUser);
   yield takeEvery(A.registerUser, registerUser);
   yield takeEvery(A.updateUserAvatar, updateUserAvatar);
