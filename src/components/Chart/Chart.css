@@ -7,6 +7,7 @@
 
 .canvas_legend {
   font: normal 24px "Roboto Mono", sans-serif;
+  text-transform: uppercase;
   color: var(--BorderColor);
 }
 
