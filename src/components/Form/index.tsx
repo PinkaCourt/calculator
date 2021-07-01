@@ -100,7 +100,7 @@ const Form: React.FC<Props> = (props) => {
         placeholder="Email"
         required
         onChange={handleLoginChange}
-        pattern="[A-Za-z]\w+@+\w+\.+\w*"
+        pattern="[A-Za-z][a-zA-Z0-9-_\.]{1,19}@[[a-z][a-z0-9\.]{1,20}\.]*\w*"
       />
       <input
         className="input"
