@@ -24,7 +24,7 @@ const SidebarButton = () => {
   };
 
   return (
-    <>
+    <div>
       <button className={"sidebar_button"} onClick={toggleList}>
         {location}
       </button>
@@ -43,6 +43,9 @@ const SidebarButton = () => {
           <NavLink
             to="/profile"
             className={"sidebar_list-link"}
+            activeStyle={{
+              fontWeight: "bold",
+            }}
             onClick={toggleLocation}
           >
             Profile
@@ -52,7 +55,7 @@ const SidebarButton = () => {
           </NavLink>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
