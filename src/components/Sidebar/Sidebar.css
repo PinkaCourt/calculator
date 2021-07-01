@@ -19,10 +19,7 @@
   text-decoration: none;
 }
 
-.sidebar_link.active {
-  font: bold 24px "Roboto Mono", sans-serif;
-}
-
+.sidebar_link.active,
 .sidebar_link-selected {
   font: bold 24px "Roboto Mono", sans-serif;
 }
@@ -35,7 +32,7 @@
   text-decoration: none;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 850px) {
   .sidebar_container {
     display: none;
   }
