@@ -1,11 +1,12 @@
 .logo {
-  position: fixed;
-  top: 30px;
-  left: 35px;
+  margin: auto 35px;
   cursor: default;
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   min-height: 100px;
   width: 100%;
   top: 0;
@@ -16,7 +17,7 @@
 }
 
 .footer {
-  position: fixed;
+  position: absolute;
   width: 100%;
   color: var(--FooterColor);
   bottom: 10px;
@@ -26,7 +27,7 @@
   z-index: 1;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
   .logo {
     top: 10px;
     left: 10px;
