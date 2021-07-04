@@ -27,18 +27,23 @@
   z-index: 1;
 }
 
-@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+@media only screen and (max-width: 715px) {
   .logo {
-    top: 10px;
-    left: 10px;
+    margin: auto 10px;
   }
 
   .header {
     min-height: 40px;
-    font: normal 16px "Reem Kufi", sans-serif;
+    font-size: 16px;
   }
 
   .footer {
-    font: normal 10px "Roboto Mono", sans-serif;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  .footer {
+    font-size: 10px;
   }
 }

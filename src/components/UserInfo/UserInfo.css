@@ -1,9 +1,6 @@
 .userInfo {
-  position: absolute;
   display: flex;
-  top: 0;
-  right: 0;
-  padding: 15px 20px;
+  margin: auto 20px;
   cursor: default;
 }
 
@@ -30,8 +27,30 @@
   filter: grayscale(100%);
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 715px) {
   .userInfo {
+    margin: auto 10px;
+  }
+
+  .userInfo_container {
+    margin: 0 5px 0 0;
+  }
+
+  .userInfo_name {
+    font-size: 14px;
+  }
+
+  .userInfo_email {
+    font-size: 12px;
+  }
+
+  .userInfo_img {
+    height: 35px;
+  }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  /* .userInfo {
     padding: 1px 2px;
     cursor: default;
   }
@@ -50,5 +69,5 @@
 
   .userInfo_img {
     height: 35px;
-  }
+  }*/
 }

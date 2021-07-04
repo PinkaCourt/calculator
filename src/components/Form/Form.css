@@ -9,9 +9,9 @@
 .input {
   margin: auto auto 15px auto;
   height: 70px;
+  width: 400px;
   border: 5px solid var(--BlackColor);
   box-sizing: border-box;
-  width: 400px;
   font: normal 36px "Roboto Mono", sans-serif;
   color: var(--borderColor);
   text-align: center;
@@ -62,15 +62,28 @@ input:invalid {
   background-color: var(--WhiteColor);
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 715px) {
   .form {
-    margin: 100px auto;
+    margin: 80px auto;
   }
 
   .input,
   .submit,
   .disable_button {
-    margin: 10px;
+    height: 40px;
+    width: 250px;
+    margin: 5px;
     font-size: 16px;
+    border: 2px solid var(--BlackColor);
+  }
+
+  .link {
+    width: 250px;
+    margin: 5px;
+    font-size: 14px;
+  }
+
+  .error {
+    font-size: 12px;
   }
 }

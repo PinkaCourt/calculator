@@ -68,11 +68,11 @@ const UploadContent = () => {
   return (
     <>
       <div className="upload_container">
-        <div className="chouse_container">
+        <div className="choose_container">
           <img className="upload_img" src={URL} alt="dick pic" />
-          <label className="chouse_link">
+          <label className="choose_link">
             <input
-              className="chouse_button"
+              className="choose_button"
               type="file"
               accept="image/jpeg,image/png"
               onChange={encodeImageFileAsURL}

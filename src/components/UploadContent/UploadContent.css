@@ -6,7 +6,7 @@
   margin: 30px 500px 0 20px;
 }
 
-.chouse_container {
+.choose_container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,11 +20,11 @@
   object-fit: cover;
 }
 
-.chouse_button {
+.choose_button {
   display: none;
 }
 
-.chouse_link {
+.choose_link {
   margin: 0 auto 40px;
   font: normal 18px "Roboto Mono", sans-serif;
   color: var(--BorderColor);
@@ -73,24 +73,50 @@
   color: var(--BlackColor);
 }
 
-@media only screen and (max-width: 992px) {
-  .upload_container {
-    margin: 10px auto;
+@media only screen and (max-width: 850px) {
+  .upload_container,
+  .upload_button {
+    margin: auto;
   }
 
-  .chouse_container,
+  .choose_container,
   .upload_email,
   .upload_name {
     margin: 0;
   }
 
-  .chouse_link {
+  .choose_link {
     margin: 0 auto;
   }
 
   .upload_button {
-    margin: 0;
     position: inherit;
+  }
+}
+
+@media only screen and (max-width: 715px) {
+  .choose_container,
+  .upload_email,
+  .upload_name,
+  .upload_button,
+  .choose_link {
     font-size: 14px;
+  }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  .choose_container {
+    max-width: 300px;
+  }
+
+  .upload_button,
+  .upload_email,
+  .upload_name {
+    width: 300px;
+    height: 40px;
+  }
+
+  .upload_img {
+    height: 300px;
   }
 }

@@ -4,7 +4,7 @@
   justify-content: space-between;
   flex: 0 0 auto;
   background-color: var(--SidebarColor);
-  padding: 40px 120px 40px 40px;
+  padding: 40px;
 }
 
 .sidebar_link-container {
