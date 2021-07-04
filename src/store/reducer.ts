@@ -7,7 +7,7 @@ export interface IniteState {
   auth: boolean;
   login: string;
   user: T.User | null;
-  data: T.Data[];
+  dicksAndAsses: T.Data[];
 }
 
 const initeState: IniteState = {
@@ -15,7 +15,7 @@ const initeState: IniteState = {
   auth: false,
   login: "",
   user: null,
-  data: [],
+  dicksAndAsses: [],
 };
 
 export const dashboardReducer = createReducer(initeState, (builder) => {
@@ -33,13 +33,13 @@ export const dashboardReducer = createReducer(initeState, (builder) => {
       state.user = payload;
     })
     .addCase(A.setUserData, (state, { payload }) => {
-      state.data = payload;
+      state.dicksAndAsses = payload;
     })
     .addCase(A.setLogout, (state) => {
       state.accessToken = "";
       state.auth = false;
       state.login = "";
       state.user = null;
-      state.data = [];
+      state.dicksAndAsses = [];
     });
 });

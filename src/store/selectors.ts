@@ -53,7 +53,7 @@ export const selectToken = (state: IniteState) => state.accessToken;
 export const selectAuth = (state: IniteState) => state.auth;
 export const selectLogin = (state: IniteState) => state.login;
 export const selectUser = (state: IniteState) => state.user;
-export const selectData = (state: IniteState) => state.data;
+export const selectData = (state: IniteState) => state.dicksAndAsses;
 
 const selectSortedData = createSelector(selectData, (data) =>
   data.slice().sort((a, b) => a.date - b.date)
