@@ -5,7 +5,7 @@ import { selectAuth } from "store/selectors";
 import UserInfo from "components/UserInfo";
 import Logo from "components/Logo";
 import SidebarButton from "components/SidebarButton";
-import "components/Components.css";
+import "./Header.css";
 
 const Header = () => {
   const auth = useSelector(selectAuth);

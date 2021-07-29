@@ -1,21 +1,3 @@
-.logo {
-  margin: auto 35px;
-  cursor: default;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 100px;
-  width: 100%;
-  top: 0;
-  left: 0px;
-  color: var(--BlackColor);
-  background-color: var(--HeaderColor);
-  font: normal 36px "Reem Kufi", sans-serif;
-}
-
 .footer {
   position: absolute;
   width: 100%;
@@ -28,15 +10,6 @@
 }
 
 @media only screen and (max-width: 715px) {
-  .logo {
-    margin: auto 10px;
-  }
-
-  .header {
-    min-height: 40px;
-    font-size: 16px;
-  }
-
   .footer {
     font-size: 12px;
   }
