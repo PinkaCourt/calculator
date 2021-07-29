@@ -8,7 +8,7 @@ const Auth = () => {
   return (
     <>
       <Header />
-      <Form autorization />
+      <Form authorization />
       <Footer />
     </>
   );

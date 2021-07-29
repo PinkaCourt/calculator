@@ -8,12 +8,10 @@ import { routes } from "App";
 import "./Form.css";
 
 type Props = {
-  autorization: boolean;
+  authorization: boolean;
 };
 
-const Form: React.FC<Props> = (props) => {
-  const { autorization } = props;
-
+const Form: React.FC<Props> = ({ authorization }) => {
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -24,7 +22,7 @@ const Form: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector(S.selectAuth);
 
-  const signature = autorization
+  const signature = authorization
     ? {
         button: "Sign in",
         span: "new to S&D? ",
@@ -55,26 +53,26 @@ const Form: React.FC<Props> = (props) => {
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (autorization) {
+    if (authorization) {
       dispatch(A.authorizationUser({ login, password }));
     } else {
       dispatch(A.registerUser({ login, password }));
     }
   };
-  // валидация
+
   React.useEffect(() => {
     const pwdMatch = confirmPassword === password;
     const fieldsFilled = Boolean(login.length && password.length);
 
     const isValid =
-      (autorization && fieldsFilled) ||
-      (!autorization && fieldsFilled && pwdMatch);
+      (authorization && fieldsFilled) ||
+      (!authorization && fieldsFilled && pwdMatch);
 
     if (!isValid && !fieldsFilled) {
       setError("Fill in all the fields");
     }
 
-    if (!autorization && !isValid && !pwdMatch) {
+    if (!authorization && !isValid && !pwdMatch) {
       setError("Passwords do not match");
     }
 
@@ -83,7 +81,7 @@ const Form: React.FC<Props> = (props) => {
     if (formValid) {
       setError("");
     }
-  }, [autorization, login, password, confirmPassword, formValid]);
+  }, [authorization, login, password, confirmPassword, formValid]);
 
   React.useEffect(() => {
     if (auth) {
@@ -110,7 +108,7 @@ const Form: React.FC<Props> = (props) => {
         required
         onChange={handlePasswordChange}
       />
-      {!autorization && (
+      {!authorization && (
         <input
           className="input"
           type="password"

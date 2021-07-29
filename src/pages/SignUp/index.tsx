@@ -8,7 +8,7 @@ const SignUp = () => {
   return (
     <div className="Auth">
       <Header />
-      <Form autorization={false} />
+      <Form authorization={false} />
       <Footer />
     </div>
   );
