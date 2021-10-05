@@ -1,23 +1,28 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import * as A from "store/actions";
+import * as S from "store/selectors";
+import { routes } from "App";
 import "./Form.css";
 
-import { routes } from "App";
-import { signIn, signUp } from "utils";
-
 type Props = {
-  autorization: boolean;
+  authorization: boolean;
 };
 
-const Form: React.FC<Props> = (props) => {
-  const { autorization } = props;
-
+const Form: React.FC<Props> = ({ authorization }) => {
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [formValid, setFormValid] = React.useState(false);
   const [error, setError] = React.useState("");
 
-  const signature = autorization
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const auth = useSelector(S.selectAuth);
+
+  const signature = authorization
     ? {
         button: "Sign in",
         span: "new to S&D? ",
@@ -31,9 +36,7 @@ const Form: React.FC<Props> = (props) => {
         path: routes.auth.path,
       };
 
-  const handleLoginChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  const handleLoginChange = (event: { target: { value: string } }) => {
     setLogin(event.target.value);
   };
 
@@ -50,16 +53,11 @@ const Form: React.FC<Props> = (props) => {
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = autorization
-      ? signIn(login, password)
-      : signUp(login, password);
-
-    response.then((data) => {
-      if (data.error) {
-        return setError(data.error);
-      }
-      console.log(data);
-    });
+    if (authorization) {
+      dispatch(A.authorizationUser({ login, password }));
+    } else {
+      dispatch(A.registerUser({ login, password }));
+    }
   };
 
   React.useEffect(() => {
@@ -67,14 +65,14 @@ const Form: React.FC<Props> = (props) => {
     const fieldsFilled = Boolean(login.length && password.length);
 
     const isValid =
-      (autorization && fieldsFilled) ||
-      (!autorization && fieldsFilled && pwdMatch);
+      (authorization && fieldsFilled) ||
+      (!authorization && fieldsFilled && pwdMatch);
 
     if (!isValid && !fieldsFilled) {
       setError("Fill in all the fields");
     }
 
-    if (!autorization && !isValid && !pwdMatch) {
+    if (!authorization && !isValid && !pwdMatch) {
       setError("Passwords do not match");
     }
 
@@ -83,34 +81,40 @@ const Form: React.FC<Props> = (props) => {
     if (formValid) {
       setError("");
     }
-  }, [autorization, login, password, confirmPassword, formValid]);
+  }, [authorization, login, password, confirmPassword, formValid]);
+
+  React.useEffect(() => {
+    if (auth) {
+      history.push("/dashboard");
+    }
+  }, [auth, history]);
 
   return (
-    <form className={"form"} onSubmit={handleClick}>
+    <form className="form" onSubmit={handleClick}>
       <input
-        className={"input"}
+        className="input"
         type="email"
         name="email"
         placeholder="Email"
-        autoComplete={"off"}
         required
         onChange={handleLoginChange}
+        pattern="[A-Za-z][a-zA-Z0-9-_\.]{1,19}@[[a-z][a-z0-9\.]{1,20}\.]*\w*"
       />
       <input
-        className={"input"}
+        className="input"
         type="password"
         name="password"
         placeholder="Password"
-        autoComplete={"off"}
+        required
         onChange={handlePasswordChange}
       />
-      {!autorization && (
+      {!authorization && (
         <input
-          className={"input"}
+          className="input"
           type="password"
           name="password"
           placeholder="Password"
-          autoComplete={"off"}
+          required
           onChange={handleConfirmPasswordChange}
         />
       )}
@@ -123,7 +127,7 @@ const Form: React.FC<Props> = (props) => {
       </button>
       <span className="link">
         {signature.span}
-        <a href={signature.path} className={"link-reg"}>
+        <a href={signature.path} className="link-reg">
           {signature.link}
         </a>
       </span>

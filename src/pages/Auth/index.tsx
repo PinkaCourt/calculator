@@ -6,11 +6,11 @@ import "./Auth.css";
 
 const Auth = () => {
   return (
-    <div className="Auth">
+    <>
       <Header />
-      <Form autorization />
+      <Form authorization />
       <Footer />
-    </div>
+    </>
   );
 };
 
